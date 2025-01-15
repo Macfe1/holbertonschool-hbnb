@@ -2,7 +2,7 @@
 
 In this part of the HBnB Project, we will begin the implementation phase of the application based onthe design developed in the architecture part. The focus of this phase is to build the Presentation and Business Logic layers of the application using Python and Flask. We will use the facade pattern to communicate the presentation layer with the business loic layer.
 
-## Project Directory Structur
+## Project Directory Structure
 
  - The `app/` directory contains the core application code.
  - The `api/` subdirectory houses the API endpoints, organized by version (`v1/`).
