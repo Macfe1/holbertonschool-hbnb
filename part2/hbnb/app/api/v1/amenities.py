@@ -1,6 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
 from flask import request
+import json
 
 api = Namespace('amenities', description='Amenity operations')
 
@@ -10,31 +11,26 @@ amenity_model = api.model('Amenity', {
 })
 
 @api.route('/')
-class AmenityList(Resource):
+class AmenityList(Resource): 
     @api.expect(amenity_model)
     @api.response(201, 'Amenity successfully created')
     @api.response(400, 'Invalid input data')
     def post(self):
         """Register a new amenity"""
         amenity_data = api.payload
-        
-        try:
-            existing_amenity = facade.get_amenity(amenity_data['id'])
-            print(f"amenity_data: {amenity_data}, existing_amenity: {existing_amenity} - ERROR")
-        except Exception as e:
-            print(f"Error as {e}")
-        """
+
+        existing_amenity = facade.get_amenity_by_name(amenity_data['name'])
         if existing_amenity:
             return {'error': 'An amenity exist'}, 400
-        """
-        new_amenity = facade.create_amenity(amenity_data)
-        return { 'id': new_amenity.id,'name': new_amenity.name}
+        else:
+            new_amenity = facade.create_amenity(amenity_data)
+            return { 'id': new_amenity.id,'name': new_amenity.name}
 
     @api.response(200, 'List of amenities retrieved successfully')
     def get(self):
         """Retrieve a list of all amenities"""
-        # Placeholder for logic to return a list of all amenities
-        pass
+        amenities = facade.get_all_amenities()
+        return json.dumps([amenity.to_dict() for amenity in amenities])
 
 @api.route('/<amenity_id>')
 class AmenityResource(Resource):
@@ -42,8 +38,10 @@ class AmenityResource(Resource):
     @api.response(404, 'Amenity not found')
     def get(self, amenity_id):
         """Get amenity details by ID"""
-        # Placeholder for the logic to retrieve an amenity by ID
-        pass
+        amenity_by_id = facade.get_amenity(amenity_id)
+        if not amenity_by_id:
+            return {'error': 'Amenity not found'}, 404
+        return {'id': amenity_by_id.id,'name': amenity_by_id.name}
 
     @api.expect(amenity_model)
     @api.response(200, 'Amenity updated successfully')
@@ -51,5 +49,14 @@ class AmenityResource(Resource):
     @api.response(400, 'Invalid input data')
     def put(self, amenity_id):
         """Update an amenity's information"""
-        # Placeholder for the logic to update an amenity by ID
-        pass
+
+        data = request.get_json()
+
+        existing_amenity = facade.get_amenity(amenity_id)
+        if not existing_amenity:
+            return {'error': 'Amenity not found'}, 404
+        
+        update_amenity = facade.update_amenity(amenity_id, data)
+        if not update_amenity:
+            return {'error': 'Invalid request'}, 400
+        return {'Sucess': 'Amenity upated', 'id': existing_amenity.id, 'name': existing_amenity.name}, 200
