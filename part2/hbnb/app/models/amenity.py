@@ -6,6 +6,7 @@ class Amenity(BaseModel):
         self.name = name
     
     def to_dict(self):
-        return{
-            'id': self.name
+        return {
+            'id': self.id,
+            'name': self.name
         }

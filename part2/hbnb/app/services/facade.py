@@ -38,18 +38,18 @@ class HBnBFacade:
 
 # Amenity Service
 
-def create_amenity(self, amenity_data):
-    amenity = Amenity(**amenity_data)
-    self.amenity_repo.add(amenity)
-    return amenity
+    def create_amenity(self, amenity_data):
+        amenity = Amenity(**amenity_data)
+        self.amenity_repo.add(amenity)
+        return amenity
 
-def get_amenity(self, amenity_id):
-    return self.amenity_repo.get(amenity_id)
+    def get_amenity(self, amenity_id):
+        return self.amenity_repo.get(amenity_id)
 
-def get_all_amenities(self):
-    return self.amenity_repo.get_all()
+    def get_all_amenities(self):
+        return self.amenity_repo.get_all()
 
-def update_amenity(self, amenity_id, amenity_data):
-    return self.amenity_repo.update(amenity_id, amenity_data)
+    def update_amenity(self, amenity_id, amenity_data):
+        return self.amenity_repo.update(amenity_id, amenity_data)
 
 # Review Service

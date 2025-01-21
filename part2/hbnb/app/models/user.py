@@ -10,6 +10,15 @@ class User(BaseModel):
         self.is_admin = is_admin
         self.places = []
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'is_admin': self.is_admin,
+        }
+
     def add_place(self, place):
         if isinstance(place, Place):
             self.places.append(place)
@@ -17,13 +26,28 @@ class User(BaseModel):
     def list_places(self):
         return self.places
 
-"""    
-    def updateProfile(self, **kwargs):
-        for key, value in kwargs.items():
-            if hasattr(self, key):
-                setattr(self, key, value)
-        self.save
 
+    def update(self, data):
+        """Update user attributes from the data passed"""
+        valid_attributes = {
+            'first_name': str,
+            'last_name': str,
+            'email': str,
+            'is_admin': bool,
+        }
+        for key, value in data.items():
+            expected_value = valid_attributes[key]
+            if key not in valid_attributes:
+                raise ValueError(f"'{key}' is not a valid attribute")
+            
+            if not isinstance(value, expected_value):
+                raise ValueError(f"'{key}' is not the right type")
+
+            setattr(self, key, value)
+
+        self.save()
+        return True
+"""
     def deleteUser(self, user_id):
         return self.id == user_id
 """
