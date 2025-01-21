@@ -5,10 +5,7 @@ class Amenity(BaseModel):
         super().__init__()
         self.name = name
     
-    """ 
-    def createAmenity(self,)
-    
-    # def deleteAmenity(self,)
-    
-    # def updateAmenity(self,)
-    """
+    def to_dict(self):
+        return{
+            'id': self.name
+        }
