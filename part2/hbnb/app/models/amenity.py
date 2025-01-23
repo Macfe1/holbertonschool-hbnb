@@ -23,4 +23,3 @@ class Amenity(BaseModel):
                 raise TypeError(f"'{value}' is not a valid type")
             setattr(self, key, value)
         self.save
-        return True

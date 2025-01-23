@@ -21,7 +21,7 @@ class AmenityList(Resource):
 
         existing_amenity = facade.get_amenity_by_name(amenity_data['name'])
         if existing_amenity:
-            return {'error': 'An amenity exist'}, 400
+            return {'error': 'The amenity already exist'}, 400
         else:
             new_amenity = facade.create_amenity(amenity_data)
             return { 'id': new_amenity.id,'name': new_amenity.name}

@@ -46,7 +46,6 @@ class User(BaseModel):
             setattr(self, key, value)
 
         self.save()
-        return True
 """
     def deleteUser(self, user_id):
         return self.id == user_id

@@ -1,5 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
+import json
+from flask import request
 
 api = Namespace('places', description='Place operations')
 
@@ -34,14 +36,30 @@ class PlaceList(Resource):
     @api.response(400, 'Invalid input data')
     def post(self):
         """Register a new place"""
-        # Placeholder for the logic to register a new place
-        pass
+        place_data = api.payload
+
+        existing_user = facade.get_user(place_data['owner_id'])
+        if not existing_user:
+            return {'error': 'User not found'}, 400
+
+        if not isinstance(place_data['price'], float) or place_data['price'] <= 0.0:
+            raise ValueError(f"The {place_data['price']} have an inavlid type or value")
+
+        if not isinstance(place_data['latitude'], float) or not (-90 <= place_data['latitude'] <= 90):
+            raise ValueError(f"The {place_data['latitude']} have an inavlid type or value")
+
+        if not isinstance(place_data['longitude'], float) or not (-180 <= place_data['longitude'] <= 180):
+            raise ValueError(f"The {place_data['longitude']} have an inavlid type or value")
+
+        else:
+            place = facade.create_place(place_data)
+            return {'id': place.id,'title': place.title, 'description': place.description, 'price': place.price, 'latitude': place.latitude, 'longitude': place.longitude, 'owner_id': place.owner_id, 'amenities': place.amenities}        
 
     @api.response(200, 'List of places retrieved successfully')
     def get(self):
         """Retrieve a list of all places"""
-        # Placeholder for logic to return a list of all places
-        pass
+        list_of_places = facade.get_all_places()
+        return json.dumps([place.to_dict() for place in list_of_places])
 
 @api.route('/<place_id>')
 class PlaceResource(Resource):
@@ -49,8 +67,10 @@ class PlaceResource(Resource):
     @api.response(404, 'Place not found')
     def get(self, place_id):
         """Get place details by ID"""
-        # Placeholder for the logic to retrieve a place by ID, including associated owner and amenities
-        pass
+        place_by_id = facade.get_place(place_id)
+        if not place_by_id:
+            return {'error': 'Place not found'}, 404
+        return {'id': place_by_id.id, 'title': place_by_id.title, 'description': place_by_id.description, 'price': place_by_id.price, 'latitude': place_by_id.latitude, 'longitude': place_by_id.longitude, 'owner_id': place_by_id.owner_id, 'amenities': place_by_id.amenities}
 
     @api.expect(place_model)
     @api.response(200, 'Place updated successfully')
@@ -58,5 +78,13 @@ class PlaceResource(Resource):
     @api.response(400, 'Invalid input data')
     def put(self, place_id):
         """Update a place's information"""
-        # Placeholder for the logic to update a place by ID
-        pass
+        data = request.get_json()
+
+        place_exist = facade.get_place(place_id)
+        if not place_exist:
+            return {'error': 'Place not found'}, 404
+
+        update_place = facade.update_place(place_id, data)
+        if not update_place:
+            return {'error': 'Invalid input data to update palce'}, 400
+        return {'success': 'Place updated successfully'}, 200
