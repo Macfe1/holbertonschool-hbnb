@@ -3,10 +3,8 @@ from app.models.basemodel import BaseModel
 class Place(BaseModel):
     def __init__(self, title, description, price, latitude, longitude, owner_id):
         super().__init__()
-        if not self.title:
-            raise ValueError("Missing title")
-        if not isinstance(self.title, str):
-            raise ValueError("Title must be a text")
+        if not self.title or not isinstance(self.title, str):
+            raise ValueError("Invalid data: title must be a non-empty string")
 
         if not self.price:
             raise ValueError("Missing price")
@@ -17,15 +15,15 @@ class Place(BaseModel):
 
         if not self.latitude:
             raise ValueError("Missing latitude")
-        if not isinstance(self.latitude, int):
-            raise ValueError("Latitude must be an integer")
+        if not isinstance(self.latitude, float):
+            raise ValueError("Latitude must be an float")
         if not -90 <= self.latitude <= 90:
             raise ValueError("Latitude must be between -90 and 90")
 
         if not self.longitude:
             raise ValueError("Missing longitude")
-        if not isinstance(self.longitude, int):
-            raise ValueError("Longitude must be an integer")
+        if not isinstance(self.longitude, float):
+            raise ValueError("Longitude must be an float")
         if not -180 <= self.longitude <= 180:
             raise ValueError("Longitude must be between -180 and 180")
 
@@ -61,7 +59,7 @@ class Place(BaseModel):
             'latitude': self.latitude,
             'longitude': self.longitude,
             'owner_id': self.owner_id,
-            # 'reviews': self.reviews,
+            'reviews': self.reviews,
             'amenities': self.amenities,
         }
 
@@ -74,7 +72,7 @@ class Place(BaseModel):
             'latitude': float,
             'longitude': float,
             'owner_id': str,
-            # 'reviews': self.reviews,
+            'reviews': str,
             'amenities': str,
         }
         for key, value in data.items():
