@@ -6,24 +6,18 @@ class Place(BaseModel):
         if not self.title or not isinstance(self.title, str):
             raise ValueError("Invalid data: title must be a non-empty string")
 
-        if not self.price:
-            raise ValueError("Missing price")
-        if not isinstance(self.price, int):
-            raise ValueError("Price must be an integer")
+        if not self.price or not isinstance(self.price, int):
+            raise ValueError("Invalid data: price must be a non-empty integer")
         if self.price < 0:
             raise ValueError("Price must be a positive number")
 
-        if not self.latitude:
-            raise ValueError("Missing latitude")
-        if not isinstance(self.latitude, float):
-            raise ValueError("Latitude must be an float")
+        if not self.latitude or not isinstance(self.latitude, float):
+            raise ValueError("Invalid data: latitude must be a non-empty float")
         if not -90 <= self.latitude <= 90:
             raise ValueError("Latitude must be between -90 and 90")
 
-        if not self.longitude:
-            raise ValueError("Missing longitude")
-        if not isinstance(self.longitude, float):
-            raise ValueError("Longitude must be an float")
+        if not self.longitude or not isinstance(self.longitude, float):
+            raise ValueError("Invalid data: longitude must be a non-empty float")
         if not -180 <= self.longitude <= 180:
             raise ValueError("Longitude must be between -180 and 180")
 
