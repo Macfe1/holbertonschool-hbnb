@@ -22,7 +22,6 @@ class ReviewList(Resource):
         """Register a new review"""
         review_data = api.payload
 
-        existing_user = facade
         try:
             new_review = facade.create_review(review_data)
             return {
