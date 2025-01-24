@@ -3,6 +3,32 @@ from app.models.basemodel import BaseModel
 class Place(BaseModel):
     def __init__(self, title, description, price, latitude, longitude, owner_id):
         super().__init__()
+        if not self.title:
+            raise ValueError("Missing title")
+        if not isinstance(self.title, str):
+            raise ValueError("Title must be a text")
+
+        if not self.price:
+            raise ValueError("Missing price")
+        if not isinstance(self.price, int):
+            raise ValueError("Price must be an integer")
+        if self.price < 0:
+            raise ValueError("Price must be a positive number")
+
+        if not self.latitude:
+            raise ValueError("Missing latitude")
+        if not isinstance(self.latitude, int):
+            raise ValueError("Latitude must be an integer")
+        if not -90 <= self.latitude <= 90:
+            raise ValueError("Latitude must be between -90 and 90")
+
+        if not self.longitude:
+            raise ValueError("Missing longitude")
+        if not isinstance(self.longitude, int):
+            raise ValueError("Longitude must be an integer")
+        if not -180 <= self.longitude <= 180:
+            raise ValueError("Longitude must be between -180 and 180")
+
         self.title = title
         self.description = description
         self.price = price
