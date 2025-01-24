@@ -46,7 +46,7 @@ class ReviewResource(Resource):
     @api.response(404, 'Review not found')
     def get(self, review_id):
         """Get review details by ID"""
-        review = facade.get_review(place_id)
+        review = facade.get_review(review_id)
         if not review:
             return {'error': 'Review not found'}, 404
 

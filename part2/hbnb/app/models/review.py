@@ -15,6 +15,29 @@ class Review(BaseModel):
         self.rating = rating
         self.place = place
         self.user = user
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'text': self.text,
+            'rating': self.rating,
+            'place': self.place,
+            'user': self.user,
+        }
+
+    def update(self, data):
+        validate_attributes = {
+            'text': str,
+            'rating': int,
+            'place': str,
+            'user': str,
+        }
+        for key, value in data.items():
+                expected_value = validate_attributes[key]
+                if key in validate_attributes:
+                    if isinstance(value, expected_value):
+                        setattr(self, key, value)
+        self.save()
 """ 
     def create_review(text, rating, user, place):
         return cls(text, rating, user, place)
