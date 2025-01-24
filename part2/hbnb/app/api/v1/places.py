@@ -52,16 +52,17 @@ class PlaceList(Resource):
             return {'error': 'User not found'}, 400
 
         if not isinstance(place_data['price'], float) or place_data['price'] <= 0.0:
-            raise ValueError(f"The {place_data['price']} have an inavlid type or value")
+            raise ValueError("Price have an invalid type or value")
 
         if not isinstance(place_data['latitude'], float) or not (-90 <= place_data['latitude'] <= 90):
-            raise ValueError(f"The {place_data['latitude']} have an inavlid type or value")
+            raise ValueError(f"Latitude have an invalid type or value")
 
         if not isinstance(place_data['longitude'], float) or not (-180 <= place_data['longitude'] <= 180):
-            raise ValueError(f"The {place_data['longitude']} have an inavlid type or value")
+            raise ValueError(f"Longitude have an inavlid type or value")
 
         else:
             place = facade.create_place(place_data)
+            print("enterd here")
             return {'id': place.id,'title': place.title, 'description': place.description, 'price': place.price, 'latitude': place.latitude, 'longitude': place.longitude, 'owner_id': place.owner_id, 'amenities': place.amenities}        
 
     @api.response(200, 'List of places retrieved successfully')

@@ -3,20 +3,22 @@ from app.models.basemodel import BaseModel
 class Place(BaseModel):
     def __init__(self, title, description, price, latitude, longitude, owner_id):
         super().__init__()
+        # title validation
         if not title or not isinstance(title, str):
             raise ValueError("Invalid data: title must be a non-empty string")
-        if not price or not isinstance(price, float):
-            raise ValueError("Invalid data: price must be a non-empty integer")
+        # price validation
+        if not price or price is None:
+            return ValueError("Price cannot be empty")
+        if not isinstance(price, float):
+            raise ValueError("Price must be a float")
         if price < 0.0:
             raise ValueError("Price must be a positive number")
-        if price is None:
-            raise ValueError("Price must be a positive number")
-
+        #latitude validation
         if not latitude or not isinstance(latitude, float):
             raise ValueError("Invalid data: latitude must be a non-empty float")
         if not -90 <= latitude <= 90:
             raise ValueError("Latitude must be between -90 and 90")
-
+        #longitude validation
         if not longitude or not isinstance(longitude, float):
             raise ValueError("Invalid data: longitude must be a non-empty float")
         if not -180 <= longitude <= 180:
