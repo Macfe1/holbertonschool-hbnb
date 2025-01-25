@@ -59,4 +59,4 @@ class AmenityResource(Resource):
         update_amenity = facade.update_amenity(amenity_id, data)
         if not update_amenity:
             return {'error': 'Invalid request'}, 400
-        return {'Sucess': 'Amenity upated', 'id': existing_amenity.id, 'name': existing_amenity.name}, 200
+        return {'Sucess': 'Amenity updated', 'id': existing_amenity.id, 'name': existing_amenity.name}, 200

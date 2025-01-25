@@ -71,16 +71,6 @@ class HBnBFacade:
 # Review Service
 
     def create_review(self, review_data):
-        user = self.user_repo.get(review_data['user_id'])
-        place = self.place_repo.get(review_data['place_id'])
-
-        if not user:
-            raise ValueError('User not found')
-        if not place:
-            raise ValueError('Place not found')
-        if not (1 <= review_data['rating'] <= 5):
-            raise ValueError('Rating must be between 1 and 5')
-
         review = Review(**review_data)
         self.review_repo.add(review)
         return review
@@ -95,19 +85,7 @@ class HBnBFacade:
         return self.review_repo.get_by_attribute('place_id', place_id)
 
     def update_review(self, review_id, review_data):
-        review = self.review_repo.get(review_id)
-        if not review:
-            return None
-
-        if 'rating' in review_data and not (1 <= review_data['rating'] <= 5):
-            raise ValueError('Rating must be between 1 and 5')
-
-        review.update(review_data)
-        return review
+        return self.review_repo.update(review_id, review_data)
 
     def delete_review(self, review_id):
-        review = self.review_repo.get(review_id)
-        if review:
-            self.review_repo.delete(review_id)
-            return True
-        return False
+        return self.review_repo.delete(review_id)
