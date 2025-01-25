@@ -63,7 +63,16 @@ class PlaceList(Resource):
         else:
             place = facade.create_place(place_data)
             print("enterd here")
-            return {'id': place.id,'title': place.title, 'description': place.description, 'price': place.price, 'latitude': place.latitude, 'longitude': place.longitude, 'owner_id': place.owner_id, 'amenities': place.amenities}        
+            return {
+                'id': place.id,
+                'title': place.title,
+                'description': place.description,
+                'price': place.price,
+                'latitude': place.latitude,
+                'longitude': place.longitude,
+                'owner_id': place.owner_id,
+                'amenities': place.amenities
+            }, 201
 
     @api.response(200, 'List of places retrieved successfully')
     def get(self):

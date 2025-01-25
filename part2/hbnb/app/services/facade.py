@@ -81,7 +81,12 @@ class HBnBFacade:
         if not (1 <= review_data['rating'] <= 5):
             raise ValueError('Rating must be between 1 and 5')
 
-        review = Review(**review_data)
+        review = Review(
+            text=review_data['text'],
+            rating=review_data['rating'],
+            place=place,
+            user=user
+        )
         self.review_repo.add(review)
         return review
 
