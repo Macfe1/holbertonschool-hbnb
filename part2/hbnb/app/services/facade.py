@@ -71,22 +71,7 @@ class HBnBFacade:
 # Review Service
 
     def create_review(self, review_data):
-        user = self.user_repo.get(review_data['user_id'])
-        place = self.place_repo.get(review_data['place_id'])
-
-        if not user:
-            raise ValueError('User not found')
-        if not place:
-            raise ValueError('Place not found')
-        if not (1 <= review_data['rating'] <= 5):
-            raise ValueError('Rating must be between 1 and 5')
-
-        review = Review(
-            text=review_data['text'],
-            rating=review_data['rating'],
-            place=place,
-            user=user
-        )
+        review = Review(**review_data)
         self.review_repo.add(review)
         return review
 
