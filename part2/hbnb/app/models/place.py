@@ -1,4 +1,5 @@
 from app.models.basemodel import BaseModel
+from app.models.review import Review
 
 class Place(BaseModel):
     def __init__(self, title, description, price, latitude, longitude, owner_id):
@@ -37,9 +38,6 @@ class Place(BaseModel):
         """Add a review to the place."""
         self.reviews.append(review)
 
-    def listed_reviews(self):
-        return self.review
-
     def add_amenity(self, amenity):
         """Add an amenity to the place."""
         self.amenities.append(amenity)
@@ -56,7 +54,7 @@ class Place(BaseModel):
             'latitude': self.latitude,
             'longitude': self.longitude,
             'owner_id': self.owner_id,
-            'reviews': self.reviews,
+            'reviews': [review.to_dict() for review in self.reviews],
             'amenities': self.amenities,
         }
 
@@ -69,20 +67,34 @@ class Place(BaseModel):
             'latitude': float,
             'longitude': float,
             'owner_id': str,
-            'reviews': str,
+            'reviews': list,
             'amenities': str,
         }
         for key, value in data.items():
                 expected_value = validate_attributes[key]
-                if key in validate_attributes:
-                    if isinstance(value, expected_value):
-                        setattr(self, key, value)
+                if not key in validate_attributes:
+                    raise ValueError(f"'{key}' is not a valid attribute")
+                #Verify that review is a list of dictionaries
+                if key == 'reviews':
+                    if not isinstance(value, list):
+                        raise ValueError(f"'reviews' should be a list")
+                    self.reviews = []
+                    for review in value:
+                        if isinstance(review, Review): #Case that review is a list of objects
+                            self.reviews.append(review)
+                        elif isinstance(review, dict): #Case that review is a list of dictionaries
+                            self.reviews.append(Review(**review))
+                        else:
+                            raise ValueError(f"Each review must be a Review object or a dictionary")
+                    continue
+
+                if not isinstance(value, expected_value):
+                    raise ValueError(f"'{key}' is not the right type")
+                setattr(self, key, value)
         self.save()
 
-"""
-    def create_place(self, owner, title, description, price, latitude, longitude):
-        return Place(title, description, price, latitude, longitude, owner)
+        """ 
+        def listed_reviews(self):
+        return self.reviews
+        """
 
-    def deletePlace(self, place_id):
-        return self.id == place_id
-"""

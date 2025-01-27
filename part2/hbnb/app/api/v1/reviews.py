@@ -79,9 +79,11 @@ class ReviewResource(Resource):
                 return {'error': 'Review not found'}, 404
 
             return {
-                'id', updated_review.id,
-                'text', updated_review.text,
-                'rating', updated_review.rating
+                'id': updated_review.id,
+                'text': updated_review.text,
+                'rating': updated_review.rating,
+                'place_id': updated_review.place_id,
+                'user_id': updated_review.user_id
             }, 200
         except ValueError as e:
             return {'error': str(e)}, 400
@@ -120,6 +122,7 @@ class PlaceReviewList(Resource):
             {
                 'id': review.id,
                 'text': review.text,
-                'rating': review.rating
+                'rating': review.rating,
+                'user_id': review.user_id,
             } for review in reviews
         ], 200

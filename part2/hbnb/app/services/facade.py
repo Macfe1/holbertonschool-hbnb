@@ -73,6 +73,14 @@ class HBnBFacade:
     def create_review(self, review_data):
         review = Review(**review_data)
         self.review_repo.add(review)
+
+        place = self.place_repo.get(review.place_id)
+        if place:
+            place.reviews.append(review)
+            data_to_update = {
+                'reviews': place.reviews
+            }
+            self.place_repo.update(place.id, data_to_update)
         return review
 
     def get_review(self, review_id):
@@ -82,18 +90,13 @@ class HBnBFacade:
         return self.review_repo.get_all()
 
     def get_reviews_by_place(self, place_id):
+        place = self.place_repo.get(place_id)
+        if place:
+            return place.reviews
         return self.review_repo.get_by_attribute('place_id', place_id)
 
     def update_review(self, review_id, review_data):
-        review = self.review_repo.get(review_id)
-        if not review:
-            return None
-
-        if 'rating' in review_data and not (1 <= review_data['rating'] <= 5):
-            raise ValueError('Rating must be between 1 and 5')
-
-        review.update(review_data)
-        return review
+        return  self.review_repo.update(review_id, review_data)
 
     def delete_review(self, review_id):
         review = self.review_repo.get(review_id)

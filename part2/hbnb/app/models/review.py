@@ -8,10 +8,13 @@ class Review(BaseModel):
             raise ValueError("Invalid data: review text must be a non-empty string")
 
         # Validate rating
-        if not 1 <= rating <= 5:
+        if rating is None:
+            raise ValueError("Rating must be an integer between 1 and 5")
+        
+        if not isinstance(rating, int):
             raise ValueError("Rating must be an integer between 1 and 5")
 
-        if not isinstance(rating, int):
+        if not 1 <= rating <= 5:
             raise ValueError("Rating must be an integer between 1 and 5")
 
         self.text = text
@@ -27,7 +30,6 @@ class Review(BaseModel):
             'place_id': self.place_id if self.place_id else None,
             'user_id': self.user_id if self.user_id else None,
         }
-        
 
     def update(self, data):
         validate_attributes = {
@@ -46,16 +48,3 @@ class Review(BaseModel):
             
             setattr(self, key, value)
         self.save()
-""" 
-    def create_review(text, rating, user, place):
-        return cls(text, rating, user, place)
-
-    def updateReview(self, **kwargs):
-        for key, value in kwargs.items():
-            if hasattr(self, key):
-                setattr(self, key, value)
-        self.save
-
-    def deleteReview(self, place, user):
-        if place_id =
-"""
