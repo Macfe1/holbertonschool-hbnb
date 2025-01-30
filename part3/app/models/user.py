@@ -1,8 +1,9 @@
-import bcrypt
+from flask_bcrypt import Bcrypt
 from app.models.basemodel import BaseModel
 from app.models.place import Place
 import re
-from werkzeug.security import generate_password_hash, check_password_hash
+
+bcrypt = Bcrypt()
 
 class User(BaseModel):
     def __init__(self, first_name, last_name, email, password, is_admin=False):
@@ -72,13 +73,8 @@ class User(BaseModel):
 
     def hash_password(self, password):
         """Hashes the password before storing it."""
-        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+        return bcrypt.generate_password_hash(password).decode('utf-8')
 
     def verify_password(self, password):
         """Verifies if the provided password matches the hashed password."""
         return bcrypt.check_password_hash(self.password, password)
-
-"""
-    def deleteUser(self, user_id):
-        return self.id == user_id
-"""
