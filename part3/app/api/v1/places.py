@@ -2,6 +2,7 @@ from flask_restx import Namespace, Resource, fields
 from app.services import facade
 import json
 from flask import request
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 api = Namespace('places', description='Place operations')
 
@@ -43,9 +44,18 @@ class PlaceList(Resource):
     @api.expect(place_model)
     @api.response(201, 'Place successfully created')
     @api.response(400, 'Invalid input data')
+    @api.response(403, 'Forbidden access')
+    @jwt_required()
     def post(self):
         """Register a new place"""
         place_data = api.payload
+
+        #To get the token id and is_admin
+        current_user = get_jwt_identity()
+
+        #We only compare the id to create the place
+        if current_user['id'] != place_data['owner_id']:
+            return {'error': 'Unauthorized action.'}, 403
 
         existing_user = facade.get_user(place_data['owner_id'])
         if not existing_user:
@@ -95,9 +105,17 @@ class PlaceResource(Resource):
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
     @api.response(400, 'Invalid input data')
+    @api.response(403, 'Forbidden access')
+    @jwt_required()
     def put(self, place_id):
         """Update a place's information"""
         data = request.get_json()
+
+        #To get the token id and is_admin
+        current_user = get_jwt_identity()
+
+        if current_user['id'] != data['owner_id']:
+            return {'error': 'Unauthorized action.'}, 403
 
         place_exist = facade.get_place(place_id)
         if not place_exist:

@@ -2,6 +2,7 @@ import json
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
 from flask import request
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 api = Namespace('users', description='User operations')
 
@@ -50,14 +51,24 @@ class UserResource(Resource):
             return {'error': 'User not found'}, 404
         return {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'email': user.email}, 200
 
+    @api.response(403, 'Forbidden access')
+    @jwt_required()
     def put(self, user_id):
         """Update user information"""
-
         data = request.get_json()
 
         existing_user = facade.get_user(user_id)
         if not existing_user:
             return {'error': 'User not found'}, 404
+
+        #To get the token id and is_admin
+        current_user = get_jwt_identity()
+
+        if current_user['id'] != user_id:
+            return {'error': 'Unauthorized action.'}, 403
+
+        if data.get('email') or data.get('password'):
+            return {'error': 'You cannot modify email or password.'}, 400
 
         # Validate attributes and set attributes
         try:

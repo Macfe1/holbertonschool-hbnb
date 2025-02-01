@@ -93,8 +93,4 @@ class Place(BaseModel):
                 setattr(self, key, value)
         self.save()
 
-        """ 
-        def listed_reviews(self):
-        return self.reviews
-        """
 

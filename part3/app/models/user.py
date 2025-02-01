@@ -52,9 +52,7 @@ class User(BaseModel):
         valid_attributes = {
             'first_name': str,
             'last_name': str,
-            'email': str,
             'is_admin': bool,
-            'password': str,
         }
         for key, value in data.items():
             expected_value = valid_attributes[key]
