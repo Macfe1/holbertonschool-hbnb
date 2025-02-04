@@ -24,6 +24,11 @@ class UserList(Resource):
     def post(self):
         """Register a new user"""
         user_data = api.payload
+
+        existing_user = facade.get_user_by_email(user_data['email'])
+        if existing_user:
+            return {'error': 'Email already registered'}, 400
+
         try:
             new_user = facade.create_user(user_data)
             return {
