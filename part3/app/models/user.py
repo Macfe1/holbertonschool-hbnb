@@ -1,8 +1,10 @@
 from flask_bcrypt import Bcrypt
-from app import db
 from app.models.basemodel import BaseModel
 from app.models.place import Place
 import re
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 bcrypt = Bcrypt()
 

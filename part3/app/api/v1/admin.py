@@ -1,15 +1,13 @@
 from flask import request
 from flask_restx import Namespace, Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
-import facade
+from app.services.facade import HBnBFacade as facade
 
 api = Namespace('admin', description='Administrator operations')
 
 def is_admin():
     current_user = get_jwt_identity()
     return current_user.get('is_admin', False)
-
-
 
 @api.route('/users/')
 class AdminUserCreate(Resource):
