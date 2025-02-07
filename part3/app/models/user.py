@@ -1,10 +1,8 @@
+from app import db
 from flask_bcrypt import Bcrypt
 from app.models.basemodel import BaseModel
 from app.models.place import Place
 import re
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
 
 bcrypt = Bcrypt()
 
@@ -17,6 +15,7 @@ class User(BaseModel):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+    
 
     def __init__(self, first_name, last_name, email, password, is_admin=False):
         super().__init__()
