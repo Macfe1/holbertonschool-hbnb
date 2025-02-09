@@ -16,7 +16,7 @@ class BaseModel(db.Model):
 
     def save(self):
         """Update the updated_at timestamp whenever the object is modified"""
-        self.updated_at = datetime.datetime
+        self.updated_at = datetime.datetime.utcnow()
 
     def update(self, data):
         """Update the attributes of the object based on the provided dictionary"""
