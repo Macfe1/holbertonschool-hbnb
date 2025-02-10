@@ -1,6 +1,7 @@
 # Ignore the virtual environment
 myenv/
 venv/
+../part2/hbnb/myenv/
 
 # Ignore compiled Python files
 *.pyc
