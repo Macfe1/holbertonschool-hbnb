@@ -1,4 +1,4 @@
-# from config import DevelopmentConfig
+from config import DevelopmentConfig
 from flask import Flask
 from flask_restx import Api
 from flask_bcrypt import Bcrypt
@@ -9,11 +9,10 @@ db = SQLAlchemy()
 jwt = JWTManager()
 bcrypt = Bcrypt()
 
-def create_app(config_class="config.DevelopmentConfig"):
-
+def create_app(config_class=DevelopmentConfig):
     app = Flask(__name__)
-
     app.config.from_object(config_class)
+
     db.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
