@@ -1,23 +1,19 @@
 import re
 import uuid
-from datetime import datetime
 from app import db, bcrypt
+from .basemodel import BaseModel
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String, Boolean, ForeignKey
 
-class User(db.Model):
+class User(BaseModel):
     """SQLAlchemy User Model"""
     __tablename__ = "users"
 
-    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))  # ✅ Auto-generate UUID
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
     email = Column(String(120), unique=True, nullable=False)
     password_hash = Column(String(128), nullable=False)  # ✅ Renamed from "password" to "password_hash"
     is_admin = Column(Boolean, default=False, nullable=False)
-
-    created_at = Column(db.DateTime, default=datetime.utcnow)
-    updated_at = Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # One-to-Many: User → Places
     places = relationship("Place", back_populates="owner", cascade="all, delete-orphan")

@@ -1,14 +1,13 @@
 from app import db
 import uuid
-from datetime import datetime
+from .basemodel import BaseModel
 from sqlalchemy import Column, String, Integer, Text, ForeignKey
 from sqlalchemy.orm import relationship
 
-class Review(db.Model):
+class Review(BaseModel):
     """SQLAlchemy Review Model"""
     __tablename__ = 'reviews'
 
-    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))  # ✅ Auto-generate UUID
     text = Column(Text, nullable=False)
     rating = Column(Integer, nullable=False)
 
@@ -19,9 +18,6 @@ class Review(db.Model):
     # ✅ One-to-Many: Review → Place
     place_id = Column(String(60), ForeignKey('places.id'), nullable=False)
     place = relationship("Place", back_populates="reviews")  # ✅ Define relationship with Place
-
-    created_at = Column(db.DateTime, default=datetime.utcnow)
-    updated_at = Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     def __init__(self, text: str, rating: int, user_id: str, place_id: str):
         """Initialize Review with Validations"""
