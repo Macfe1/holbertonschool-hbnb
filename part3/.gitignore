@@ -4,9 +4,14 @@ venv/
 ../part2/hbnb/myenv/
 
 # Ignore compiled Python files
-*.pyc
-*.pyo
-__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/*.pyw
+**/*.pyz
+**/*.pywz
+**/*.pyzw
+**/__pycache__/
 
 # Ignore pip vendor packages
 **/pip/_vendor/

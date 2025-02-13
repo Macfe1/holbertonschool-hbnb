@@ -1,15 +1,14 @@
 from app import db
 import uuid
-from datetime import datetime
+from .basemodel import BaseModel
 from sqlalchemy import Column, String, Float, Text, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from app.models.place_amenity import place_amenity
 
-class Place(db.Model):
+class Place(BaseModel):
     """SQLAlchemy Place Model"""
     __tablename__ = 'places'
 
-    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))  # Auto-generate UUID
     title = Column(String(255), nullable=False)
     description = Column(Text, nullable=True)
     price = Column(Float, nullable=False)
@@ -25,9 +24,6 @@ class Place(db.Model):
 
     # Many-to-Many: Place ↔ Amenity
     amenities = relationship("Amenity", secondary=place_amenity, back_populates="places")
-
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     def __init__(self, title: str, price: float, latitude: float, longitude: float, owner_id: str, description: str = ""):
         """Initialize Place with Validations"""
