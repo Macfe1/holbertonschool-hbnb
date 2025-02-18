@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="login.html" class="login-button">Login</a>
+            <a href="index.html">Index</a>
+            <a href="add_review.html">Places</a>
+        </nav>
+        <img src="./images/icon.png" alt="icon image">
+    </header>
+    <main>
+        <section id="place-details">
+            <h2>Place 1</h2>
+            <div class="place-info">
+                <p>
+                    description
+                </p>
+                <ul>
+                    <li>host</li>
+                    <li>price</li>
+                </ul>
+                <dl>
+                    <dt> Rooms</dt>
+                    <dd>four</dd>
+                </dl>
+            </div>
+        </section>
+        <section id="reviews">
+            <article class="review-card"> 
+                <p>Comment<p>
+                <strong>
+                    username
+                    rate
+                </strong>
+                <a href="add_review.hmtl" class="button">Add review page if the user is login</a>
+            </article>
+        </section>
+        <section id="add-review">
+            <h2>Add a Review</h2>
+            <form id="review-form">
+                <label for="review-text">Review:</label>
+                <textarea id="review-text" name="review-text" required></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Hbnb, Inc.</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
