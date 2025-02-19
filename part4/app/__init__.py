@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt  # ✅ Import Bcrypt for password hashing
 from config import DevelopmentConfig
+from flask_cors import CORS
 
 # ✅ Initialize extensions (but don't tie them to the app yet)
 jwt = JWTManager()
@@ -12,6 +13,7 @@ bcrypt = Bcrypt()  # ✅ Add bcrypt instance
 
 def create_app(config_class=DevelopmentConfig):
     app = Flask(__name__)
+    CORS(app)
 
     # ✅ Load configuration from the provided config class
     app.config.from_object(config_class)
