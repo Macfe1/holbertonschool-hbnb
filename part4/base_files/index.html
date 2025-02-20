@@ -11,7 +11,7 @@
         <nav>
             <a href="login.html" class="login-button">Login</a>
             <a href="add_review.html">Add review</a>
-            <a href="place.html">Places</a>
+            <a href="index.html">Places</a>
         </nav>
         <img src="./images/icon.png" alt="icon image">
     </header>
@@ -19,17 +19,11 @@
         <section id="filter">
             <label for="price-filter">Max Price:</label>
             <select id="price-filter">
-                <!-- Options will be populated dynamically -->
+                <!-- Options will be populated by populatePriceFilter() -->
             </select>
         </section>
         <section id="places-list">
-            <article class="place-card"> 
-                <h3>Place 1</h3>
-                <strong>
-                    precio
-                </strong>
-                <button class="details-button">View Details</button>
-            </article>
+            <!-- Place cards will be dynamically added here by displayPlaces() -->
         </section>
     </main>
     <footer>
