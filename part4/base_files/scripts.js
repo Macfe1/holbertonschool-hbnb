@@ -20,7 +20,7 @@ async function loginUser(email, password) {
 
 /* function to extract the place_id*/
 function getPlaceIdFromURL() {
-  const URLparameters =  new URLSearchParams(window.location.search)
+  const URLparameters = new URLSearchParams(window.location.search)
   console.log(URLparameters)
   const place_id = URLparameters.get('place_id')
   console.log(place_id)
@@ -87,8 +87,8 @@ function checkAuthentication() {
 
 function populatePriceFilter() {
   const priceFilter = document.getElementById('price-filter');
-  const prices = ['10', '50', '100', 'All'];
-  
+  const prices = ['All', '10', '50', '100'];
+
   prices.forEach(price => {
     const option = document.createElement('option');
     option.value = price;
@@ -99,11 +99,11 @@ function populatePriceFilter() {
 
 function filterPlaces(maxPrice) {
   const placeCards = document.querySelectorAll('.place-card');
-  
+
   placeCards.forEach(card => {
     const priceElement = card.querySelector('strong');
     const price = parseFloat(priceElement.textContent.replace('$', ''));
-    
+
     if (maxPrice === 'All' || price <= parseFloat(maxPrice)) {
       card.style.display = 'block';
     } else {
@@ -115,24 +115,25 @@ function filterPlaces(maxPrice) {
 function displayPlaces(places) {
   const placesList = document.getElementById('places-list');
   placesList.innerHTML = '';
-  
+
   places.forEach(place => {
     const placeCard = document.createElement('article');
     placeCard.className = 'place-card';
-    
+
     placeCard.innerHTML = `
       <h3>${place.title}</h3>
       <p>Location: ${place.latitude}, ${place.longitude}</p>
+      <p>Price: <strong>$${place.price}</strong></p>
       <button class="details-button">View Details</button>
     `;
-    
+
     placesList.appendChild(placeCard);
   });
 }
 
-  
+
 document.addEventListener('DOMContentLoaded', () => {
-  /*Login */ 
+  /*Login */
   const loginForm = document.getElementById('login-form');
 
   if (loginForm) {
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   checkAuthentication();
   populatePriceFilter();
-  
+
   // Add event listener for price filter
   document.getElementById('price-filter').addEventListener('change', (event) => {
     const selectedPrice = event.target.value;
