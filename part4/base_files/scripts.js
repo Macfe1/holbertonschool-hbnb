@@ -26,24 +26,7 @@ function getPlaceIdFromURL() {
   console.log(place_id)
 }
 
-/*Check user authentication:*/
-function checkAuthentication() {
-  const token = getCookie('token');
-  const loginLink = document.querySelector('.login-button');
-  const addReviewSection = document.getElementById('add-review');
-
-  if (!token) {
-    loginLink.style.display = 'block';
-    addReviewSection.style.display = 'none';
-  } else {
-    loginLink.style.display = 'none';
-    fetchPlaces(token);
-    addReviewSection.style.display = 'block';
-    // Store the token for later use
-    fetchPlaceDetails(token, placeId);
-  }
-}
-
+// Get cookie function
 function getCookie(name) {
   const cookies = document.cookie.split(';');
 
@@ -59,7 +42,7 @@ function getCookie(name) {
 
 async function fetchPlaces(token) {
   try {
-    const response = await fetch('/api/v1/places/', {
+    const response = await fetch('http://127.0.0.1:5000/api/v1/places/', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -78,7 +61,29 @@ async function fetchPlaces(token) {
   }
 }
 
+async function fetchPlaceDetails(token, placeId) {
+  // Make a GET request to fetch place details
+  // Include the token in the Authorization header
+  // Handle the response and pass the data to displayPlaceDetails function
+}
 
+/*Check user authentication:*/
+function checkAuthentication() {
+  const token = getCookie('token');
+  const loginLink = document.querySelector('.login-button');
+  const addReviewSection = document.getElementById('add-review');
+
+  if (!token) {
+    loginLink.style.display = 'block';
+    addReviewSection.style.display = 'none';
+  } else {
+    loginLink.style.display = 'none';
+    fetchPlaces(token);
+    addReviewSection.style.display = 'block';
+    //Store the token for later use
+    fetchPlaceDetails(token, placeId);
+  }
+}
 
 function populatePriceFilter() {
   const priceFilter = document.getElementById('price-filter');
