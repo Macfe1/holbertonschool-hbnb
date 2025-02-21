@@ -61,10 +61,33 @@ async function fetchPlaces(token) {
   }
 }
 
+// 
 async function fetchPlaceDetails(token, placeId) {
-  // Make a GET request to fetch place details
-  // Include the token in the Authorization header
-  // Handle the response and pass the data to displayPlaceDetails function
+  try {
+    const response = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`); 
+    }
+    const data = await response.json();
+    displayPlaceDetails(data)
+  } catch (error) {
+    console.error('Error fetching place details:', error)
+    alert('Failed to retrieve place details: ' + error.message);
+  }
+}
+
+function displayPlaceDetails(place) {
+  
+  // Clear the current content of the place details section
+  // Create elements to display the place details (name, description, price, amenities and reviews)
+  // Append the created elements to the place details section
 }
 
 /*Check user authentication:*/
