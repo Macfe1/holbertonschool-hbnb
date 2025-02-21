@@ -18,29 +18,29 @@ async function loginUser(email, password) {
   }
 }
 
-/* function to extract the place_id*/
+/* function to extract the place_id
 function getPlaceIdFromURL() {
   const URLparameters =  new URLSearchParams(window.location.search)
   console.log(URLparameters)
   const place_id = URLparameters.get('place_id')
   console.log(place_id)
 }
-
+*/
 /*Check user authentication:*/
 function checkAuthentication() {
   const token = getCookie('token');
   const loginLink = document.querySelector('.login-button');
-  const addReviewSection = document.getElementById('add-review');
+  //const addReviewSection = document.getElementById('add-review');
 
   if (!token) {
     loginLink.style.display = 'block';
-    addReviewSection.style.display = 'none';
+    //addReviewSection.style.display = 'none';
   } else {
     loginLink.style.display = 'none';
     fetchPlaces(token);
-    addReviewSection.style.display = 'block';
+    //addReviewSection.style.display = 'block';
     // Store the token for later use
-    fetchPlaceDetails(token, placeId);
+    //fetchPlaceDetails(token, placeId);
   }
 }
 
@@ -59,7 +59,7 @@ function getCookie(name) {
 
 async function fetchPlaces(token) {
   try {
-    const response = await fetch('/api/v1/places/', {
+    const response = await fetch('http://127.0.0.1:5000/api/v1/places/', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -78,11 +78,9 @@ async function fetchPlaces(token) {
   }
 }
 
-
-
 function populatePriceFilter() {
   const priceFilter = document.getElementById('price-filter');
-  const prices = ['10', '50', '100', 'All'];
+  const prices = ['All', '10', '50', '100'];
   
   prices.forEach(price => {
     const option = document.createElement('option');
@@ -118,6 +116,7 @@ function displayPlaces(places) {
     placeCard.innerHTML = `
       <h3>${place.title}</h3>
       <p>Location: ${place.latitude}, ${place.longitude}</p>
+      <p>Price: <strong>$${place.price}</strong></p>
       <button class="details-button">View Details</button>
     `;
     
