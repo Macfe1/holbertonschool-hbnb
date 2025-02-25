@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place Details</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <nav>
             <a href="login.html" class="login-button">Login</a>
             <a href="index.html">Index</a>
-            <a href="add_review.html">Places</a>
+            <a href="add_review.html">Add Review</a>
         </nav>
         <img src="./images/icon.png" alt="icon image">
     </header>
@@ -23,31 +25,34 @@
                     description
                 </p>
                 <ul>
-                    <li>host</li>
                     <li>price</li>
+                    <li>latitude</li>
+                    <li>longitude</li>
                 </ul>
-                <dl>
-                    <dt> Rooms</dt>
-                    <dd>four</dd>
-                </dl>
+                <!--<ul>
+                    <li> Rooms</li>
+                    <li>WiFi</li>
+                </ul>-->
             </div>
         </section>
         <section id="reviews">
-            <article class="review-card"> 
-                <p>Comment<p>
-                <strong>
-                    username
-                    rate
-                </strong>
-                <a href="add_review.hmtl" class="button">Add review page if the user is login</a>
-            </article>
+            <h2>Reviews</h2>
+            <div id="review-list">
+                <article class="review-card">
+                    <span class="review-username">Usuario123</span>
+                    <span class="review-rating">⭐ 4.5/5</span>
+                    <p>Comment</p>
+                </article>
+            </div>
+            <a href="add_review.html" class="button" id="add-review-button">Add a Review</a>
         </section>
-        <section id="add-review">
+        <!-- Form to add a Review -->
+        <section id="add-review" style="display: none;">
             <h2>Add a Review</h2>
             <form id="review-form">
                 <label for="review-text">Review:</label>
                 <textarea id="review-text" name="review-text" required></textarea>
-                
+
                 <button type="submit">Submit</button>
             </form>
         </section>
@@ -57,4 +62,5 @@
     </footer>
     <script src="scripts.js"></script>
 </body>
+
 </html>

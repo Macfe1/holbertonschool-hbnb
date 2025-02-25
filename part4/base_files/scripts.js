@@ -18,21 +18,28 @@ async function loginUser(email, password) {
   }
 }
 
-/* function to extract the place_id*/
+// function to extract the place_id//
 function getPlaceIdFromURL() {
-  const URLparameters = new URLSearchParams(window.location.search)
-  console.log(URLparameters)
-  const place_id = URLparameters.get('place_id')
-  console.log(place_id)
+  const parts = window.location.pathname.split('/');
+
+  const placeIndex = parts.indexOf('places') + 1;
+
+  //If places doesn't exists return -1
+  if (parts.indexOf('places') === -1) {
+    throw new Error("Error: No place_id found in the URL");
+  }
+  
+  if (placeIndex <= 0 || placeIndex >= parts.length) {  
+    throw new Error("Error: No place_id found in the URL");
+  }
+  return parts[placeIndex];
 }
 
 // Get cookie function
 function getCookie(name) {
   const cookies = document.cookie.split(';');
-
   for (let cookie of cookies) {
     const [cookieName, cookieValue] = cookie.trim().split('=');
-
     if (cookieName === name) {
       return cookieValue;
     }
@@ -61,7 +68,7 @@ async function fetchPlaces(token) {
   }
 }
 
-// 
+//Get place details function
 async function fetchPlaceDetails(token, placeId) {
   try {
     const response = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, {
@@ -73,7 +80,7 @@ async function fetchPlaceDetails(token, placeId) {
     });
 
     if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`); 
+      throw new Error(`Error: ${response.status}: ${response.statusText}`); 
     }
     const data = await response.json();
     displayPlaceDetails(data)
@@ -83,11 +90,76 @@ async function fetchPlaceDetails(token, placeId) {
   }
 }
 
+//Organize de place details in the HTML//
 function displayPlaceDetails(place) {
-  
-  // Clear the current content of the place details section
-  // Create elements to display the place details (name, description, price, amenities and reviews)
-  // Append the created elements to the place details section
+  const placeDetails = document.getElementById('place-details');
+
+  const title = document.createElement("h2");
+  title.textContent = place.title;
+
+  const divPlaceInfo = document.createElement("div");
+  divPlaceInfo.classList.add("place-info");
+
+  const description = document.createElement("p");
+  description.textContent = place.description;
+
+  const mainDetails = document.createElement("ul");
+
+  const longitude = document.createElement("li");
+  longitude.textContent = ` Longitude: ${place.longitude}`;
+
+  const latitude = document.createElement("li");
+
+  latitude.textContent = `Latitude: ${place.latitude}`;
+  const price = document.createElement("li");
+
+  price.textContent = `Price: $${place.price}`;
+
+  placeDetails.replaceChildren()//To clear the previous Place
+
+  placeDetails.appendChild(title);
+  placeDetails.appendChild(divPlaceInfo);
+  divPlaceInfo.appendChild(description);
+  divPlaceInfo.appendChild(mainDetails);
+  mainDetails.appendChild(longitude);
+  mainDetails.appendChild(latitude);
+  mainDetails.appendChild(price);
+
+  const reviews = document.getElementById('review-list');
+  reviews.replaceChildren();
+
+  if (!place.reviews || !place.reviews.length){
+    console.log('No reviews found for this place.');
+    const noReviews = document.createElement("p");
+    noReviews.textContent = "No reviews available.";
+    reviews.appendChild(noReviews);
+    return; // Getting out of the function to avoiding the forEach
+}
+
+  place.reviews.forEach(review => {
+
+    const reviewCard = document.createElement("article");
+    reviewCard.classList.add("review-card")
+
+    const user = document.createElement("span");
+    user.classList.add("review-username")
+    user.textContent = review.user_id;
+
+    // rating between 1 - 5
+    const ratingValue = Math.min(5, Math.max(1, review.rating || 1)); 
+
+    const rating = document.createElement("span");
+    rating.classList.add("review-rating")
+    rating.innerHTML = "⭐".repeat(ratingValue);
+
+    const reviewComment = document.createElement("p");
+    reviewComment.textContent = review.text;
+
+    reviews.appendChild(reviewCard);
+    reviewCard.appendChild(user);
+    reviewCard.appendChild(rating);
+    reviewCard.appendChild(reviewComment);
+  });
 }
 
 /*Check user authentication:*/
@@ -101,9 +173,9 @@ function checkAuthentication() {
     addReviewSection.style.display = 'none';
   } else {
     loginLink.style.display = 'none';
-    fetchPlaces(token);
     addReviewSection.style.display = 'block';
-    //Store the token for later use
+    fetchPlaces(token);
+    placeId = getPlaceIdFromURL()
     fetchPlaceDetails(token, placeId);
   }
 }
@@ -153,7 +225,6 @@ function displayPlaces(places) {
     placesList.appendChild(placeCard);
   });
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
   /*Login */
