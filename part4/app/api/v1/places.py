@@ -125,3 +125,27 @@ class PlaceReviewList(Resource):
             reviews = [reviews]  # Convert single object to list to avoid TypeError
 
         return [{'id': review.id, 'text': review.text, 'rating': review.rating} for review in reviews], 200
+
+"""
+IN CASE WE WANT TO DO THE AMENITIES ENDPOINS TO ADD THE AMENITIES TO THE PLACE
+
+@api.route('/<place_id>/amenities') 
+class PlaceReviewList(Resource):
+    @api.response(200, 'List of amenities for the place retrieved successfully')
+    @api.response(404, 'Place not found')
+    def get(self, place_id):
+        (Get all amenities for a specific place is a comment)
+        amenities = facade.get_reviews_by_place(place_id)
+
+        if reviews is None:  # If no reviews exist for the place, return 404
+            return {'error': 'Place not found'}, 404
+
+        # ✅ Ensure reviews is a list before iterating
+        if not isinstance(reviews, list):
+            reviews = [reviews]  # Convert single object to list to avoid TypeError
+
+        return [{'id': review.id, 'text': review.text, 'rating': review.rating} for review in reviews], 200
+    
+    GET, POST, DELETE
+"""
+    

@@ -82,7 +82,6 @@ class HBnBFacade:
         amenity = self.amenity_repo.get(amenity_id)
         if not amenity:
             raise ValueError("Amenity not found.")
-
         if 'name' in amenity_data:
             if not amenity_data['name'].strip():
                 raise ValueError("Amenity name cannot be empty.")
