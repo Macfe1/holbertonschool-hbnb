@@ -20,19 +20,14 @@ async function loginUser(email, password) {
 
 // function to extract the place_id//
 function getPlaceIdFromURL() {
-  const parts = window.location.pathname.split('/');
-
-  const placeIndex = parts.indexOf('places') + 1;
-
-  //If places doesn't exists return -1
-  if (parts.indexOf('places') === -1) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const placeId = urlParams.get('id');
+  
+  if (!placeId) {
     throw new Error("Error: No place_id found in the URL");
   }
   
-  if (placeIndex <= 0 || placeIndex >= parts.length) {  
-    throw new Error("Error: No place_id found in the URL");
-  }
-  return parts[placeIndex];
+  return placeId;
 }
 
 // Get cookie function
@@ -47,12 +42,11 @@ function getCookie(name) {
   return null;
 }
 
-async function fetchPlaces(token) {
+async function fetchPlaces() {
   try {
     const response = await fetch('http://127.0.0.1:5000/api/v1/places/', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     });
@@ -62,6 +56,7 @@ async function fetchPlaces(token) {
     }
 
     const data = await response.json();
+    console.log('Places data:', data);
     displayPlaces(data);
   } catch (error) {
     console.error('Error fetching places:', error);
@@ -170,14 +165,25 @@ function checkAuthentication() {
 
   if (!token) {
     loginLink.style.display = 'block';
-    addReviewSection.style.display = 'none';
+    if (addReviewSection) {  // Check if element exists
+      addReviewSection.style.display = 'none';
+    }
   } else {
     loginLink.style.display = 'none';
-    addReviewSection.style.display = 'block';
-    fetchPlaces(token);
-    placeId = getPlaceIdFromURL()
-    fetchPlaceDetails(token, placeId);
+    if (addReviewSection) {  // Check if element exists
+      addReviewSection.style.display = 'block';
+    }
+    // Only try to fetch place details if we're on a place detail page
+    try {
+      const placeId = getPlaceIdFromURL();
+      fetchPlaceDetails(token, placeId);
+    } catch (error) {
+      console.log('Not on a place detail page');
+    }
   }
+
+  // Fetch places regardless of authentication status
+  fetchPlaces();
 }
 
 function populatePriceFilter() {
@@ -219,8 +225,14 @@ function displayPlaces(places) {
       <h3>${place.title}</h3>
       <p>Location: ${place.latitude}, ${place.longitude}</p>
       <p>Price: <strong>$${place.price}</strong></p>
-      <button class="details-button">View Details</button>
+      <button class="details-button" data-place-id="${place.id}">View Details</button>
     `;
+
+    // Add click handler for the details button
+    const detailsButton = placeCard.querySelector('.details-button');
+    detailsButton.addEventListener('click', () => {
+      window.location.href = `place.html?id=${place.id}`;
+    });
 
     placesList.appendChild(placeCard);
   });
