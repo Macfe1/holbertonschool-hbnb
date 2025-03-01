@@ -111,6 +111,8 @@ body.login-page {
     z-index: 1;
 }
 
+/* Login h2 */
+
 #login-form h2 {
     font-size: 30px;
     color: #ee4b69f2;
@@ -118,23 +120,49 @@ body.login-page {
     text-align: center;
 }
 
-#login-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
+#welcome-paragraph {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #555;
 }
 
-#email-label {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    
-}
 
+#email-label,
 #password-label {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
+    width: 100%;
+    margin-bottom: 20px;
 }
+
+#email-label input, 
+#password-label input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+/* submit button */
+#login-form button[type="submit"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-top: 20px;
+    background-color: #ee4b69f2;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#login-form button[type="submit"]:hover {
+    background-color: #f06d6b;
+}
+
+
 
 /* footer of the login page */
 footer.footer-login {
