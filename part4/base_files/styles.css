@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
     color: #222222;
 }
 
@@ -17,13 +17,13 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 0.8rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Logo */
 #icon-img {
-    width: 65px;
+    width: 59px;
     height: auto;
 }
 
@@ -33,14 +33,14 @@ nav {
     align-items: center;
     gap: 1rem;
     background-color: #FF385C;
-    padding: 10px 20px;
+    padding: 8px 20px;
     border-radius: 15px;
-    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.1);
 }
 
 /* Links */
 nav a {
-    font-size: 18px;
+    font-size: 16px;
     color: #F7F7F7;
     text-decoration: none;
     padding: 8px 15px;
@@ -76,29 +76,69 @@ nav a:hover {
     border-radius: 10px;
     margin: 20px;
     padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 
 main {
     padding: 20px;
+    margin-bottom: 50px;
+    background-color: rgb(252, 255, 255);
 }
 
 /* login.html */
+
+body.login-page {
+    overflow: hidden;
+}
+
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: calc(100vh - 250px);
+    padding: 15px;
+    overflow: visible;
+    background-color: #fcfcfc;
 }
 
 #login-form {
-    background: white;
+    padding: 50px;
+    background: rgb(255, 255, 255);
     border-radius: 40px;
-    padding: 20px;
-    box-shadow: 50 50px 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
 }
 
-#login-form h2{
-    padding: 30px;
+#login-form h2 {
+    font-size: 30px;
+    color: #ee4b69f2;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
+#login-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#email-label {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    
+}
+
+#password-label {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+/* footer of the login page */
+footer.footer-login {
+    height: 30px;
+    padding: 10px 0;
+    position: relative; 
+}
