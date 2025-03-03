@@ -162,15 +162,21 @@ function checkAuthentication() {
   const token = getCookie('token');
   const loginLink = document.querySelector('.login-button');
   const addReviewSection = document.getElementById('add-review');
+  const reviewForm = document.getElementById('review-form');
 
   if (!token) {
     loginLink.style.display = 'block';
-    if (addReviewSection) {  // Check if element exists
+    if (addReviewSection) {
       addReviewSection.style.display = 'none';
+    }
+    // If we're on the add_review page, redirect to index
+    if (reviewForm) {
+      window.location.href = 'index.html';
+      return; // Stop execution after redirect
     }
   } else {
     loginLink.style.display = 'none';
-    if (addReviewSection) {  // Check if element exists
+    if (addReviewSection) {
       addReviewSection.style.display = 'block';
     }
     // Only try to fetch place details if we're on a place detail page
@@ -238,6 +244,36 @@ function displayPlaces(places) {
   });
 }
 
+// Add this new function to handle review submission
+async function submitReview(reviewData, token) {
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/v1/reviews/', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(reviewData)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (data.error === 'You have already reviewed this place') {
+        throw new Error('You have already submitted a review for this place');
+      } else if (data.error === 'You cannot review your own place') {
+        throw new Error('You cannot review your own place');
+      } else {
+        throw new Error(data.error || 'Failed to submit review');
+      }
+    }
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   /*Login */
   const loginForm = document.getElementById('login-form');
@@ -261,4 +297,74 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedPrice = event.target.value;
     filterPlaces(selectedPrice);
   });
+
+  const reviewForm = document.getElementById('review-form');
+  
+  if (reviewForm) {
+    const token = getCookie('token');
+    let placeId;
+    
+    try {
+      placeId = getPlaceIdFromURL();
+      
+      // Add place title to the review form
+      fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(place => {
+        const formTitle = document.querySelector('#review-form h2');
+        formTitle.textContent = `Add Review for ${place.title}`;
+      })
+      .catch(error => console.error('Error fetching place details:', error));
+      
+    } catch (error) {
+      console.error('Error getting place ID:', error);
+      window.location.href = 'index.html';
+      return;
+    }
+
+    reviewForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      const reviewText = document.getElementById('review').value;
+      const rating = parseInt(document.getElementById('rating').value);
+      
+      if (!rating || !reviewText.trim()) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      try {
+        const reviewData = {
+          text: reviewText.trim(),
+          rating: rating,
+          place_id: placeId
+        };
+
+        await submitReview(reviewData, token);
+        
+        // Clear the form
+        document.getElementById('review').value = '';
+        document.getElementById('rating').value = '';
+        
+        // Show success message and redirect
+        alert('Review submitted successfully!');
+        window.location.href = `place.html?id=${placeId}`;
+      } catch (error) {
+        console.error('Review submission error:', error);
+        
+        // Show specific error messages
+        if (error.message.includes('already reviewed')) {
+          alert('You have already submitted a review for this place');
+        } else if (error.message.includes('own place')) {
+          alert('You cannot review your own place');
+        } else {
+          alert('Failed to submit review: ' + error.message);
+        }
+      }
+    });
+  }
 });
