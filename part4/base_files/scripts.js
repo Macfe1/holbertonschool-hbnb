@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = `place.html?id=${placeId}`;
       } catch (error) {
         console.error('Review submission error:', error);
-        
+
         // Show specific error messages
         if (error.message.includes('already reviewed')) {
           alert('You have already submitted a review for this place');
