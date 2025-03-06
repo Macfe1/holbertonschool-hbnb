@@ -11,6 +11,7 @@ El propósito de esta fase es optimizar la aplicación en varios niveles, enfoc�
 ✅ Eliminación de páginas innecesarias y fusión de algunas para mayor eficiencia 🔄  
 ✅ Ajustes en la responsividad 📱  
 ✅ Optimización progresiva del backend para mejorar modularidad y escalabilidad ⚙️  
+✅ Implementación de mejores prácticas tanto en el frontend como en el backend a medida que las aprendo 📖✨  
 
 ## Tecnologías Utilizadas 🛠️
 - **HTML y CSS** 🎨 (Estilos y estructura visual)
@@ -37,6 +38,7 @@ Para ver los cambios en acción, sigue estos pasos:
 - Se están realizando mejoras progresivas en el código para hacerlo más modular y escalable.
 - Algunas páginas han sido eliminadas o fusionadas para optimizar la estructura del proyecto.
 - Mantiene todas las funcionalidades previas, pero con una organización más eficiente.
+- A medida que adquiero nuevos conocimientos sobre mejores prácticas, se irán implementando en el frontend y backend.
 
 ---
 ✨ **¡Espero que estas mejoras hagan que la experiencia con HBnB sea aún mejor!** ✨
