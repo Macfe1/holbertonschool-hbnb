@@ -85,6 +85,36 @@ async function fetchPlaceDetails(token, placeId) {
   }
 }
 
+async function fetchPlaceReviews(token, placeId) {
+  try {
+    const response = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}/reviews`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    // Verificar si la respuesta contiene un array de reseñas
+    if (!Array.isArray(data)) {
+      console.warn('Unexpected response format:', data);
+      return [];
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error fetching place reviews:', error);
+    return []; // Devolver un array vacío si hay un error
+  }
+}
+
+
 //Organize de place details in the HTML//
 function displayPlaceDetails(place) {
   const placeDetails = document.getElementById('place-details');
@@ -183,6 +213,7 @@ function checkAuthentication() {
     try {
       const placeId = getPlaceIdFromURL();
       fetchPlaceDetails(token, placeId);
+      fetchPlaceReviews(token, placeId);
     } catch (error) {
       console.log('Not on a place detail page');
     }
