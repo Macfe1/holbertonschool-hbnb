@@ -10,53 +10,52 @@
 
 <body>
     <header>
-        <img src="./images/airbnb.png" alt="icon image" id="icon-img">
+        <!--Logo linked to the index.html-->
+        <a href="index.html">
+            <img src="./images/airbnb.png" alt="icon image" id="icon-img">
+        </a>    
+        <!--Menu-->
         <nav>
             <a href="index.html" class="login-button">Login</a>
             <a href="index.html">Index</a>
-            <a href="add_review.html">Add Review</a>
         </nav>
     </header>
     <main>
+        <!--Place details-->
         <section id="place-details">
-            <h2>Place 1</h2>
-            <div class="place-info">
-                <p>
-                    description
-                </p>
-                <ul>
-                    <li>price</li>
-                    <li>latitude</li>
-                    <li>longitude</li>
-                </ul>
-            </div>
+            <!--Will be filled dynamically with the displayPlaceDetails() function-->
         </section>
+        <!--Place reviews-->
         <section id="reviews">
             <h2>Reviews</h2>
             <div id="review-list">
-                <article class="review-card">
-                    <span class="review-username">Usuario123</span>
-                    <span class="review-rating">⭐ 4.5/5</span>
-                    <p>Comment</p>
-                </article>
+                <!--Will be filled dynamically with the displayPlaceDetails() function-->
             </div>
             <a href="add_review.html" class="button" id="add-review-button">Add a Review</a>
         </section>
-        <!-- Form to add a Review -->
-        <section id="add-review" style="display: none;">
-            <h2>Add a Review</h2>
-            <form id="review-form">
-                <label for="review-text">Review:</label>
-                <textarea id="review-text" name="review-text" required></textarea>
-
-                <button type="submit">Submit</button>
-            </form>
+        <!--Place amenities-->
+        <section id="amenities-section" class="place-amenities">
+            <h2>Amenities</h2>
+            <div class="amenities-list">
+                <div class="amenity">
+                    <img src="https://cdn-icons-png.flaticon.com/128/4783/4783178.png" alt="WiFi icon">
+                    <span>WiFi</span>
+                </div>
+                <div class="amenity">
+                    <img src="https://cdn-icons-png.flaticon.com/128/17186/17186731.png" alt="Mini bar icon">
+                    <span>Minibar</span>
+                </div>
+                <div class="amenity">
+                    <img src="https://cdn-icons-png.flaticon.com/128/3215/3215406.png" alt="Pool icon">
+                    <span>Swimming Pool</span>
+                </div>
+            </div>
         </section>
+        
     </main>
     <footer>
         <p>© 2025 Hbnb, Inc.</p>
     </footer>
     <script src="scripts.js"></script>
 </body>
-
 </html>

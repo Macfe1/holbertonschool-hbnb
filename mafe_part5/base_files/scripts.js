@@ -141,10 +141,9 @@ function displayPlaceDetails(place) {
   longitude.textContent = ` Longitude: ${place.longitude}`;
 
   const latitude = document.createElement("li");
-
   latitude.textContent = `Latitude: ${place.latitude}`;
+  
   const price = document.createElement("li");
-
   price.textContent = `Price: $${place.price}`;
 
   placeDetails.replaceChildren()//To clear the previous Place
@@ -160,13 +159,13 @@ function displayPlaceDetails(place) {
   const reviews = document.getElementById('review-list');
   reviews.replaceChildren();
 
-  if (!place.reviews || !place.reviews.length){
+  if (!place.reviews || !place.reviews.length) {
     console.log('No reviews found for this place.');
     const noReviews = document.createElement("p");
     noReviews.textContent = "No reviews available.";
     reviews.appendChild(noReviews);
     return; // Getting out of the function to avoiding the forEach
-}
+  }
 
   place.reviews.forEach(review => {
 
@@ -198,7 +197,7 @@ function displayPlaceDetails(place) {
 function checkAuthentication() {
   const token = getCookie('token');
   const loginLink = document.querySelector('.login-button');
-  const addReviewSection = document.getElementById('add-review');
+  const addReviewSection = document.getElementById('add-review-button');
   const reviewForm = document.getElementById('review-form');
   const modal = document.getElementById('loginModal');
 

@@ -13,6 +13,7 @@ HBnB es un proyecto educativo en el que desarrollamos una plataforma web inspira
 ## Objetivo 📌
 El propósito de este proyecto es construir, desde cero, una aplicación web funcional donde los usuarios puedan:
 
+✅ Hacer Login y Log out
 ✅ Ver los alojamientos existentes 🏡  
 ✅ Filtrar hospedajes 🔍  
 ✅ Agregar Reviews ✍️  
@@ -27,7 +28,8 @@ Para lograr nuestro objetivo, utilizamos diversas herramientas y lenguajes, entr
 - **Flask** 🌐 (Framework web)
 - **JavaScript** 📜 (Interactividad en el front-end)
 - **HTML y CSS** 🎨 (Interfaz de usuario)
-- **SQLAlchemy** 🗄️ (Base de datos)
+- **SQLAlchemy** 🗃️ (ORM que facilita la interacción con bases de datos SQL)
+- **SQLite** 💾 (Base de datos ligera y fácil de usar para desarrollo y pruebas)
 - **GitHub** 🌍 (Control de versiones y colaboración)
 
 ## Instalación y Uso 🚀
@@ -57,6 +59,11 @@ Si deseas probar el proyecto en tu entorno local, sigue estos pasos:
    ```
    http://localhost:5000...
    ```
+
+## Mejoras en la Rama "mafe" 💪
+
+En la rama mafe, encontrarás la carpeta mafe_part5, donde se han realizado optimizaciones adicionales al proyecto. Estas incluyen mejoras en la estructura del código, 
+diseño y modularidad tanto en el frontend como en el backend.
 
 ## Licencia 📜
 Este proyecto es de uso educativo y no tiene fines comerciales.
