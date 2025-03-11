@@ -1,0 +1,65 @@
+.TH HBnB 1 "01/27/2025" "1.0" "User Commands"
+
+.SH NAME
+HBnB - Handles API requests and processes responses.
+
+.SH SYNOPSIS
+.B curl -X GET http://server/file/location/
+.br
+.B curl -X GET http://server/file/location/object_id
+.br
+.B curl -X POST http://server/file/location/ -H "Content-Type: application/json" -d '{"key_1": "value_1", "key_2": "value_2"}'
+.br
+.B curl -X PUT http://server/file/location/object_id -H "Content-Type: application/json" -d '{"new_key_1": "new_value_1", "new_key_2": "new_value_2"}'
+.br
+.B curl -X DELETE http://server/file/location/object_id
+
+.SH DESCRIPTION
+The 
+.B HBnB 
+project handles API requests and processes responses. It supports operations for the following entities:
+
+.TP
+**Users**:
+Create, update, retrieve, and list users. Required fields:
+.B first_name, last_name, email, is_admin.
+
+.TP
+**Places**:
+Create, update, retrieve, and list places. Required fields:
+.B title, description, price, latitude, longitude, owner_id.
+
+.TP
+**Amenities**:
+Create, retrieve, and list amenities. Required field:
+.B name.
+
+.TP
+**Reviews**:
+Create, update, retrieve, list, and delete reviews. Required fields:
+.B text, rating, place_id, user_id.
+
+Note: 
+.B Reviews 
+are the only entity that can be deleted.
+
+.SH EXAMPLES
+To create a new user:
+.sp
+.B curl -X POST http://localhost:5000/api/v1/users/  -H "Content-Type: application/json"  -d '{"first_name": "Marta", "last_name": "Torre", "email": "marta@gmail.com"}'
+
+To update a new place:
+.sp
+.B curl -X PUT http://localhost:5000/api/v1/places/place_id -H "Content-Type: application/json" -d '{"title": "Hotel X", "description": "A great place to rest", "price": 100.000,  "latitude": 37.7749, "longitude": -122.4194, "owner_id": "user_id"}'
+
+To retrive a list of amenities:
+.sp
+.B curl -X GET http://localhost:5000/api/v1/amenities/
+
+To delete a review:
+.sp
+.B curl -X DELETE http://localhost:5000/api/v1/reviews/review_id
+
+.TP SEE ALSO 
+.sp
+Airbnb platform

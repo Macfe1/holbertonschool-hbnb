@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Places</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="./images/airbnb.png" alt="icon image" id="icon-img">
+        <nav>
+            <button id="open-modal" class="login-button">Login</button>
+            <a href="add_review.html">Add review</a>
+            <a href="places.html">Places</a>
+        </nav>
+    </header>
+    <!--Login Modal-->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <section class="login-container">
+                <form id="login-form">
+                    <span class="close">×</span>
+                    <h2>Login</h2>
+                    <div id="welcome-paragraph">
+                        <p>
+                            Welcome back! Please login to your <br>
+                            account
+                        </p>
+                    </div>
+                    <div class="form-credentials">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email"  placeholder="Enter email" required>
+                    </div>
+                    <div class="form-credentials">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </section>
+        </div>
+    </div>
+    <main>
+        <section id="filter">
+            <label for="price-filter">Max Price:</label>
+            <select id="price-filter">
+                <!-- Options will be populated by populatePriceFilter() -->
+            </select>
+        </section>
+        <section id="places-list">
+            <!-- Place cards will be dynamically added here by displayPlaces() -->
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Hbnb, Inc.</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
