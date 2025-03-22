@@ -8,11 +8,14 @@
 </head>
 <body>
     <header>
-        <img src="./images/airbnb.png" alt="icon image" id="icon-img">
+        <!--Logo linked to the index.html-->
+        <a href="index.html">
+            <img src="./images/airbnb.png" alt="icon image" id="icon-img">
+        </a>   
         <nav>
             <a href="index.html" class="login-button">Login</a>
             <a href="index.html">Index</a>
-            <a href="index.html">Places</a>
+            <button id="close-session" class="log-out-button">Log out</button>
         </nav>
     </header>
     <main>
@@ -30,12 +33,13 @@
                 <option value="4">4 Stars</option>
                 <option value="5">5 Stars</option>
             </select>
-            <button type="submit">Submit Review</button>
+            <button type="submit" id="review-form">Submit Review</button>
         </form>
     </main>
     <footer>
         <p>© 2025 Hbnb, Inc.</p>
     </footer>
-    <script src="scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script type="module" src="scripts.js" defer></script>
 </body>
 </html>

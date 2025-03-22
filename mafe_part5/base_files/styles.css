@@ -94,14 +94,37 @@ nav a:hover {
     background-color: #f06d6b;
 }
 
+/* Botón de Log Out */
+.log-out-button {
+    font-size: 16px;
+    background-color: #ee4b69f2;
+    color: #F7F7F7;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+
+    /* Styles to NOT look like a default button */
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.log-out-button:hover {
+    font-weight: bold;
+    background-color: #f06d6b;
+    color: #fff;
+}
+
 /* Botón de Login */
 .login-button {
+    font-size: 16px;
     background-color: #ee4b69f2;
-    color: #222222;
-    padding: 10px 15px;
+    color: #F7F7F7;
+    padding: 8px 15px;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
     transition: background 0.3s;
 
     /* Styles to NOT look like a button */
@@ -113,6 +136,7 @@ nav a:hover {
 }
 
 .login-button:hover {
+    font-weight: bold;
     background-color: #f06d6b;
     color: #fff;
 }
@@ -200,6 +224,15 @@ nav a:hover {
 }
 
 /* Index.html */
+
+/*Image of every card */
+.imageCardIndex {
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+
 /* Card container */
 #places-list {
     display: flex;
@@ -387,20 +420,24 @@ nav a:hover {
     margin-top: 10px;
 }
 
-#add-review-button {
+#add-review-button-place {
     display: inline-block;
     padding: 12px 24px;
     background-color: #FF385C;
     color: white;
     text-decoration: none;
+    border: none; /* Remove default button borders */
     border-radius: 8px;
     margin-top: 20px;
     font-weight: bold;
-    width: 20%;
+    cursor: pointer; /* Ensure it looks clickable */
+    font-size: 16px;
+    text-align: center;
+    width: auto; /* Adjust as needed */
     transition: background-color 0.3s;
 }
 
-#add-review-button:hover {
+#add-review-button-place:hover {
     background-color: #E31C5F;
 }
 

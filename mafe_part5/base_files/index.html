@@ -14,6 +14,7 @@
         </a>
         <nav>
             <button id="open-modal" class="login-button">Login</button>
+            <button id="close-session" class="log-out-button">Log out</button>
         </nav>
     </header>
     <!--Login Modal-->
@@ -44,9 +45,9 @@
     </div>
     <main>
         <section id="filter">
-            <label for="price-filter">Max Price:</label>
-            <select id="price-filter">
-                <!-- Options will be populated by populatePriceFilter() -->
+            <label for="price-filter" id="price-filter-label">Max Price:</label>
+            <select id="price-filter" aria-labelledby="price-filter-label">
+                <!-- Options will be populated dynamically -->
             </select>
         </section>
         <section id="places-list">
@@ -56,6 +57,7 @@
     <footer>
         <p>© 2025 Hbnb, Inc.</p>
     </footer>
-    <script src="scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script type="module" src="scripts.js" defer></script>
 </body>
 </html>

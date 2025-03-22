@@ -118,7 +118,7 @@ class PlaceReviewList(Resource):
         reviews = facade.get_reviews_by_place(place_id)
 
         if reviews is None:  # If no reviews exist for the place, return 404
-            return {'error': 'Place not found'}, 404
+            return {'error': 'Reviews not found'}, 404
 
         # ✅ Ensure reviews is a list before iterating
         if not isinstance(reviews, list):

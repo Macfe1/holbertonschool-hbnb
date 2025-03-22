@@ -209,7 +209,7 @@ class HBnBFacade:
 
     def get_reviews_by_place(self, place_id):
         """Retrieves all reviews for a specific place."""
-        return self.review_repo.get_by_attribute('place_id', place_id)
+        return self.review_repo.get_reviews_by_attribute('place_id', place_id)
     
     def get_reviews_by_place_and_user(self, place_id, user_id):
         """Retrieve a review left by a specific user for a specific place"""
