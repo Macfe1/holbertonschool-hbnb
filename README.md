@@ -15,7 +15,7 @@ El propósito de este proyecto fue construir desde cero, una aplicación web don
 
 ## Cómo se ve la aplicación:
 
-**Video** 🏠
+**Video**
 🔗 [Ver video en YouTube](https://youtu.be/g8apjaBVCFA)
 
 ## Flujo de secuencia
