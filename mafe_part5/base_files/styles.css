@@ -73,6 +73,7 @@ footer {
     background: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
+    z-index: 1000;
 }
 
 /*Search bar*/
@@ -85,6 +86,7 @@ footer {
     overflow: hidden;
     border: 3px solid  rgba(255, 114, 114);
     margin-bottom: 20px;
+    z-index: 10;
 }
 
 .search-item {
@@ -211,6 +213,7 @@ nav a:hover {
 }
 
 /* login modal */
+
 
 .login-container {
     display: flex;
