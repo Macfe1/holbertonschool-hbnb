@@ -97,6 +97,7 @@ Si deseas probar el proyecto en tu entorno local, sigue estos pasos:
 
 En la rama mafe, encontrarás la carpeta mafe_part5, donde se han realizado optimizaciones adicionales al proyecto. Estas incluyen mejoras en la estructura del código, 
 diseño y modularidad tanto en el frontend como en el backend.
+
 ---
 
 ✨ **¡Gracias por visitar nuestro proyecto HBnB! Esperamos que disfrutes explorándolo tanto como nosotros disfrutamos creándolo.** ✨
