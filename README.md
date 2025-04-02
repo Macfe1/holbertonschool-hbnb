@@ -1,25 +1,59 @@
-# HBnB - Proyecto Educativo 🏠
+# HBnB 🏠
 
 ## Descripción
 
-HBnB es un proyecto educativo en el que desarrollamos una plataforma web inspirada en **Airbnb**. Este proyecto forma parte de nuestro aprendizaje en desarrollo web y nos permite aplicar conceptos clave como:
-
-- **Back-end y Bases de Datos** 🗄️
-- **Front-end y Diseño Web** 🎨
-- **Desarrollo de APIs** 🔗
-- **Autenticación y Gestión de Usuarios** 🔐
-- **Despliegue y Escalabilidad** 🚀
+HBnB es una plataforma web inspirada en Airbnb, desarrollada completamente desde cero. Nuestro objetivo es ofrecer una experiencia fluida y funcional para la reserva y gestión de alojamientos.
 
 ## Objetivo 📌
-El propósito de este proyecto es construir, desde cero, una aplicación web funcional donde los usuarios puedan:
+El propósito de este proyecto fue construir desde cero, una aplicación web donde los usuarios puedan:
 
-✅ Hacer Login y Log out
+✅ Hacer Login
 ✅ Ver los alojamientos existentes 🏡  
 ✅ Filtrar hospedajes 🔍  
 ✅ Agregar Reviews ✍️  
-✅ Ver las acomodaciones 🏨  
+✅ Ver las acomodaciones 🏨
 
-Todo esto con una arquitectura sólida que sigue buenas prácticas de desarrollo. 💡
+## Cómo se ve la aplicación:
+
+**Video** 🏠
+[![Ver video](https://img.icons8.com/ios/452/video-playlist.png)](https://drive.google.com/uc?export=download&id=1twMVOA_jEsWIB_vDx_s3slDDF8zZl4me)
+
+
+## Flujo de secuencia
+
+```mermaid
+---
+title: Sequence Diagram for User Login
+---
+sequenceDiagram
+
+    actor User
+    participant APIendpoint
+    participant UserService
+    participant UserRepository
+    participant Database
+
+    User->>APIendpoint: POST api/v1/auth/login (email, password)
+    APIendpoint->>UserService: authenticateUser(email, password)
+    UserService->>UserRepository: getUserByEmail(email)
+    UserRepository->>Database: SELECT * FROM users WHERE email = ?
+    Database-->>UserRepository: user data
+    UserRepository-->>UserService: User object
+    alt User exists
+        UserService->>UserService: verifyPassword(password, user.password_hash)
+        alt Password is correct
+            UserService->>UserService: generateJWT(user.id, user.is_admin)
+            UserService-->>APIendpoint: JWT token
+            APIendpoint-->>User: 200 OK (access_token)
+        else Password is incorrect
+            UserService-->>APIendpoint: {"error": "Invalid credentials"}
+            APIendpoint-->>User: 401 Unauthorized
+        end
+    else User does not exist
+        UserService-->>APIendpoint: {"error": "Invalid credentials"}
+        APIendpoint-->>User: 401 Unauthorized
+    end
+```
 
 ## Tecnologías Utilizadas 🛠️
 Para lograr nuestro objetivo, utilizamos diversas herramientas y lenguajes, entre ellos:
@@ -46,7 +80,7 @@ Si deseas probar el proyecto en tu entorno local, sigue estos pasos:
    ```
 3. **Inicializa la base de datos:**
    ```bash
-   python3
+   flask shell
    >>> from app import db
    >>> db.create_all()
    >>> exit()
@@ -64,10 +98,6 @@ Si deseas probar el proyecto en tu entorno local, sigue estos pasos:
 
 En la rama mafe, encontrarás la carpeta mafe_part5, donde se han realizado optimizaciones adicionales al proyecto. Estas incluyen mejoras en la estructura del código, 
 diseño y modularidad tanto en el frontend como en el backend.
-
-## Licencia 📜
-Este proyecto es de uso educativo y no tiene fines comerciales.
-
 ---
 
 ✨ **¡Gracias por visitar nuestro proyecto HBnB! Esperamos que disfrutes explorándolo tanto como nosotros disfrutamos creándolo.** ✨
