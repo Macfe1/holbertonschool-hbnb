@@ -16,8 +16,7 @@ El propósito de este proyecto fue construir desde cero, una aplicación web don
 ## Cómo se ve la aplicación:
 
 **Video** 🏠
-[![Ver video](https://img.icons8.com/ios/452/video-playlist.png)](https://youtu.be/g8apjaBVCFA)
-
+🔗 [Ver video en YouTube](https://youtu.be/g8apjaBVCFA)
 
 ## Flujo de secuencia
 
