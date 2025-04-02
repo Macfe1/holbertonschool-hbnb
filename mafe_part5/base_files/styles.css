@@ -6,13 +6,20 @@
     font-family: Arial, sans-serif;
 }
 
-html, body {
+html {
     background-color: #f7f7f7;
     color: #222222;
     height: 100%;
-    margin: 0;
+    margin: 0px;
     display: flex;
     flex-direction: column;
+}
+
+body {
+    padding: 40px;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #fff;
 }
 
 /* Header */
@@ -21,14 +28,14 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    padding: 0.6rem 0.8rem;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0.9rem 2rem 0.9rem;
 }
 
 main {
     flex: 1;
     padding: 20px;
     margin-bottom: 0;
+    padding: 1rem 2rem 1rem;
     background-color: rgb(252, 255, 255);
 }
 
@@ -66,6 +73,68 @@ footer {
     background: rgba(0, 0, 0, 0.5);
     align-items: center;
     justify-content: center;
+}
+
+/*Search bar*/
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid  rgba(255, 114, 114);
+    margin-bottom: 20px;
+}
+
+.search-item {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    /*border-radius: 5px;*/
+    /*border: 2px solid rgba(255, 114, 114);*/
+    position: relative;
+    flex: 1;
+}
+
+.search-item:not(:first-child) {
+    border-left: 2px solid rgba(255, 114, 114); /* Línea divisoria entre elementos */
+}
+
+.search-item input,
+.search-item select {
+    border: none;
+    outline: none;
+    width: 100%;
+    background: transparent;
+}
+
+#button-search-bar {
+    background-color: #ee4b69f2;
+    color: white;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#button-search-bar:hover {
+    background-color: rgba(243, 50, 85);
+}
+
+/*Title*/
+
+#logo-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+header h1 {
+    left: 2000;
 }
 
 /* NAV - Estilizado */
@@ -225,6 +294,62 @@ nav a:hover {
 
 /* Index.html */
 
+hr {
+    border: none;
+    height: 2px;
+    background-color: rgba(247, 210, 219, 0.5);
+}
+
+/*Text at the top of the index*/
+#text-home {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 20px;
+}
+
+/*Filter*/
+
+#filter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px; 
+    margin-right: 90px;
+    margin-bottom:30px;
+    gap: 20px;
+}
+
+#price-filter-label {
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+    color: #0c0b0bf2;
+    font-weight: bold;
+}
+
+#price-filter {
+    text-align: center;
+    text-align-last: center;
+    
+    font-size: 16px;
+    background-color: #130c0df2;
+    color: #F7F7F7;
+    padding: 5px 9px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+
+    /* Styles to NOT look like a button*/
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.filter_text {
+    align-items: center;
+}
+
 /*Image of every card */
 .imageCardIndex {
     max-width: 80%;
@@ -239,7 +364,7 @@ nav a:hover {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 20px;
+    padding: 20px 0 20px;
 }
 
 /* Every card style*/

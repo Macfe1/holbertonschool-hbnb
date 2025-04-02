@@ -327,10 +327,11 @@ function populatePriceFilter() {
     return;
   }
 
-  const prices = ['All', '10', '50', '100'];
+  const prices = ['All', '100.00', '200.00', '500.00'];
 
   prices.forEach(price => {
     const option = document.createElement('option');
+    option.classList.add("filter_text")
     option.value = price;
     option.textContent = price === 'All' ? 'All' : `$${price}`;
     priceFilter.appendChild(option);

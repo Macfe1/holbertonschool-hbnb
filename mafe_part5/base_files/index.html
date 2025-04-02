@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Places</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <!--Logo linked to the index.html-->
-        <a href="index.html">
-            <img src="./images/airbnb.png" alt="icon image" id="icon-img">
-        </a>
+        <div id="logo-title">
+            <a href="index.html">
+                <img src="./images/airbnb.png" alt="icon image" id="icon-img">
+            </a>
+            <h1>HBnB</h1>
+        </div>
         <nav>
-            <button id="open-modal" class="login-button">Login</button>
-            <button id="close-session" class="log-out-button">Log out</button>
+            <button id="open-modal" class="login-button" aria-label="Open login modal">Login</button>
+            <button id="close-session" class="log-out-button" aria-label="Log out">Log out</button>
         </nav>
     </header>
     <!--Login Modal-->
@@ -32,7 +37,7 @@
                     </div>
                     <div class="form-credentials">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email"  placeholder="Enter email" required>
+                        <input type="email" id="email" name="email" placeholder="Enter email" required>
                     </div>
                     <div class="form-credentials">
                         <label for="password">Password:</label>
@@ -44,12 +49,41 @@
         </div>
     </div>
     <main>
+        <section id="search-place">
+            <form class="search-bar">
+                <div class="search-item">
+                    <label for="destination">🏨</label>
+                    <input type="text" id="destination" placeholder="Where are you going?">
+                </div>
+
+                <div class="search-item">
+                    <label for="dates">📅</label>
+                    <input type="text" id="dates" placeholder="Check-in date — Check-out date">
+                </div>
+
+                <div class="search-item">
+                    <label for="guests">👤</label>
+                    <select id="guests">
+                        <option>2 adults · 0 children · 1 room</option>
+                    </select>
+                </div>
+
+                <button id="button-search-bar" type="submit">Search</button>
+            </form>
+        </section>
+
         <section id="filter">
-            <label for="price-filter" id="price-filter-label">Max Price:</label>
-            <select id="price-filter" aria-labelledby="price-filter-label">
+            <label for="price-filter" id="price-filter-label">Filter by Price:</label>
+            <select id="price-filter" aria-labelledby="price-filter">
+                <option value="" disabled selected>Select a price</option>
                 <!-- Options will be populated dynamically -->
             </select>
         </section>
+        <hr>
+        <div id="text-home">
+            <h1>Find your next stay</h1> <br>
+            <h4>An adventure is waiting for you</h4>
+        </div>
         <section id="places-list">
             <!-- Place cards will be dynamically added here by displayPlaces() -->
         </section>
@@ -60,4 +94,5 @@
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <script type="module" src="scripts.js" defer></script>
 </body>
+
 </html>
