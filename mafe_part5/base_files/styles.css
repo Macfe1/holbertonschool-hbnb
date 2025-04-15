@@ -1,5 +1,4 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,15 +9,14 @@ html {
     background-color: #f7f7f7;
     color: #222222;
     height: 100%;
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
+    margin: 0;
 }
 
 body {
-    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     margin: 0;
-    box-sizing: border-box;
     background-color: #fff;
 }
 
@@ -32,10 +30,10 @@ header {
 }
 
 main {
-    flex: 1;
+    flex: 1 0 auto;
     padding: 20px;
     margin-bottom: 0;
-    padding: 1rem 2rem 1rem;
+    padding: 1rem 2rem;
     background-color: rgb(252, 255, 255);
 }
 
@@ -46,15 +44,11 @@ footer {
     padding: 10px 0;
     position: relative;
     */
-    height: 50px;
-    position: relative; 
     background: #222;
     color: white;
     text-align: center;
     padding: 15px;
-    width: 100%;
-    bottom: 0;
-    margin-top: 0;
+    margin-top: auto;
 }
 
 /* Logo */
