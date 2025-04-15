@@ -44,10 +44,6 @@ Para ver los cambios en acción, sigue estos pasos:
    http://localhost:5000
    ```
 
-## Notas 📝
-- Se están realizando mejoras progresivas en el código para hacerlo más modular y escalable.
-- Algunas páginas han sido eliminadas o fusionadas para optimizar la estructura del proyecto.
-- Mantiene todas las funcionalidades previas, pero con una organización más eficiente.
 
 ---
 ✨ **¡Espero que estas mejoras hagan que la experiencia con HBnB sea aún mejor!** ✨
