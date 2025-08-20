@@ -98,9 +98,9 @@ If you want to try the project locally, follow these steps:
    - VS Code: right-click `index.html` → **Open with Live Server** (recommended)
    > Note: If you don't see the option, install the “Live Server” extension in VS Code.
 
-## Improvements in the "mafe" Branch 💪
+## Improvements in the "mafe_part5" folder 💪
 
-In the mafe branch, you’ll find the mafe_part5 folder, where additional optimizations were made to the project. These include improvements to code structure, design, and modularity across both the frontend and backend.
+The mafe_part5 folder contains additional optimizations to the project, including improvements to code structure, design, and modularity across both the front end and back end.
 
 ---
 
