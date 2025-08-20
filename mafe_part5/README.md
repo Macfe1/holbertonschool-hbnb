@@ -2,7 +2,7 @@
 
 ## How it looks
 
-![HBnB Preview](images/HBNB.png)
+![HBnB Preview](../images/HBNB.png)
 
 ## Description 📌
 
