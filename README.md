@@ -2,23 +2,24 @@
 
 ## Descripción
 
-HBnB es una plataforma web inspirada en Airbnb, desarrollada completamente desde cero. Nuestro objetivo es ofrecer una experiencia fluida y funcional para la reserva y gestión de alojamientos.
+HBnB is a web platform inspired by Airbnb, built completely from scratch. Our goal is to offer a smooth and functional experience for booking and managing accommodations.
 
-## Objetivo 📌
-El propósito de este proyecto fue construir desde cero, una aplicación web donde los usuarios puedan:
+## Goal 📌
 
-✅ Hacer Login
-✅ Ver los alojamientos existentes 🏡  
-✅ Filtrar hospedajes 🔍  
-✅ Agregar Reviews ✍️  
-✅ Ver las acomodaciones 🏨
+✅ Log in
+✅ View existing listings 🏡
+✅ Filter listings 🔍
+✅ Add reviews ✍️
+✅ View accommodations 🏨
 
-## Cómo se ve la aplicación:
+## How the application looks:
 
 **Video**
 🔗 [Ver video en YouTube](https://youtu.be/g8apjaBVCFA)
 
-## Flujo de secuencia
+![HBnB Preview](images/HBNB.png)
+
+## Sequence Flow
 
 ```mermaid
 ---
@@ -54,51 +55,54 @@ sequenceDiagram
     end
 ```
 
-## Tecnologías Utilizadas 🛠️
-Para lograr nuestro objetivo, utilizamos diversas herramientas y lenguajes, entre ellos:
+## Tech Stack 🛠️
 
-- **Python** 🐍 (Back-end y gestión de datos)
-- **Flask** 🌐 (Framework web)
-- **JavaScript** 📜 (Interactividad en el front-end)
-- **HTML y CSS** 🎨 (Interfaz de usuario)
-- **SQLAlchemy** 🗃️ (ORM que facilita la interacción con bases de datos SQL)
-- **SQLite** 💾 (Base de datos ligera y fácil de usar para desarrollo y pruebas)
-- **GitHub** 🌍 (Control de versiones y colaboración)
+- Python 🐍 (backend and data handling)
 
-## Instalación y Uso 🚀
-Si deseas probar el proyecto en tu entorno local, sigue estos pasos:
+- Flask 🌐 (web framework)
 
-1. **Clona el repositorio:**
+- JavaScript 📜 (front-end interactivity)
+
+- HTML & CSS 🎨 (user interface)
+
+- SQLAlchemy 🗃️ (ORM for SQL databases)
+
+- SQLite 💾 (lightweight database for development and testing)
+
+- GitHub 🌍 (version control and collaboration)
+
+## Installation & Usage 🚀
+If you want to try the project locally, follow these steps:
+
+1. **Clone the repository:**
    ```bash
    git clone git@github.com:tu-usuario/holbertonschool-hbnb.git
    cd holbertonschool-hbnb
    ```
-2. **Instala las dependencias:**
+2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
-3. **Inicializa la base de datos:**
+3. **Initialize the database:**
    ```bash
    flask shell
    >>> from app import db
    >>> db.create_all()
    >>> exit()
    ```
-4. **Ejecuta el servidor:**
+4. **Run the server:**
    ```bash
    python3 run.py
    ```
-5. **Abre tu navegador y accede a:**
-   ```
-   http://localhost:5000...
-   ```
+5. **Open the UI preview**
+   - VS Code: right-click `index.html` → **Open with Live Server** (recommended)
+   > Note: If you don't see the option, install the “Live Server” extension in VS Code.
 
-## Mejoras en la Rama "mafe" 💪
+## Improvements in the "mafe" Branch 💪
 
-En la rama mafe, encontrarás la carpeta mafe_part5, donde se han realizado optimizaciones adicionales al proyecto. Estas incluyen mejoras en la estructura del código, 
-diseño y modularidad tanto en el frontend como en el backend.
+In the mafe branch, you’ll find the mafe_part5 folder, where additional optimizations were made to the project. These include improvements to code structure, design, and modularity across both the frontend and backend.
 
 ---
 
-✨ **¡Gracias por visitar nuestro proyecto HBnB! Esperamos que disfrutes explorándolo tanto como nosotros disfrutamos creándolo.** ✨
+✨ **Thanks for visiting our HBnB project! We hope you enjoy exploring it as much as we enjoyed building it.** ✨
 
