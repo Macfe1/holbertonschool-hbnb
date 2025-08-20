@@ -7,11 +7,11 @@ HBnB is a web platform inspired by Airbnb, built completely from scratch. Our go
 ## Goal 📌
 The purpose of this project was to build, from the ground up, a web application where users can:
 
-✅ Log in
-✅ View existing listings 🏡
-✅ Filter accommodations 🔍
-✅ Add reviews ✍️
-✅ View accommodation details 🏨
+- ✅ Log in
+- ✅ View existing listings 🏡
+- ✅ Filter accommodations 🔍
+- ✅ Add reviews ✍️
+- ✅ View accommodation details 🏨
 
 ## How the application looks:
 
